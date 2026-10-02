@@ -48,3 +48,11 @@ async def update_device(name: str, device: Device):
     if not result.matched_count:
         raise HTTPException(status_code=404, detail="Device not found")
     return device
+
+#task 5: Write a delete request to delete a device by name
+@app.delete("/devices/{name}")
+async def delete_device(name: str):
+    result = devices.delete_one({"name": name})
+    if not result.deleted_count:
+        raise HTTPException(status_code=404, detail="Device not found")
+    return {"message": "Device deleted"}
