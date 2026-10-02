@@ -40,3 +40,11 @@ async def get_device(name: str):
 async def add_device(device: Device):
     devices.insert_one(device.dict())
     return device
+
+#task 4: Write a put request to update a device by name
+@app.put("/devices/{name}")
+async def update_device(name: str, device: Device):
+    result = devices.replace_one({"name": name}, device.dict())
+    if not result.matched_count:
+        raise HTTPException(status_code=404, detail="Device not found")
+    return device
