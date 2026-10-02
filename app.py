@@ -22,3 +22,7 @@ class Device(BaseModel):
 
 # Your handlers go below this line.
 
+#Task 1: Write a get request to print all devices
+@app.get("/devices")
+async def get_devices():
+    return devices.find({}, {"_id": 0})
