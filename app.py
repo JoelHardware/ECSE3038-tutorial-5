@@ -35,4 +35,8 @@ async def get_device(name: str):
         raise HTTPException(status_code=404, detail="Device not found")
     return device
 
-
+#task 3: Write a post request to add a device
+@app.post("/devices")
+async def add_device(device: Device):
+    devices.insert_one(device.dict())
+    return device
